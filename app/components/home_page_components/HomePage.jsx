@@ -96,6 +96,7 @@ const ClientLogoContainer = styled(Box)(({ theme }) => ({
 
 function HomePage() {
   const [open, setOpen] = useState(true);
+  const [allowCookiePopup, setAllowCookiePopup] = useState(true);
 
   const handleClose = () => {
     setOpen(false);
@@ -114,6 +115,20 @@ function HomePage() {
     </React.Fragment>
   );
 
+  const cookiesAction = (
+    <Stack justifyContent="center" alignItems="center" width="100%">
+      <Button
+        onClick={() => {
+          setAllowCookiePopup(false);
+        }}
+        variant="contained"
+        color="secondary"
+      >
+        Allow all cookies
+      </Button>
+    </Stack>
+  );
+
   return (
     <>
       <Snackbar
@@ -130,6 +145,24 @@ function HomePage() {
         message="Slack is your Digital HQ. Meet the new features keeping teams connected in a work-from-anywhere world. Let'Go"
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         action={action}
+      />
+      <Snackbar
+        sx={{
+          "& .MuiSnackbarContent-root": {
+            width: "100px",
+            borderRadius: "10px !important",
+            backgroundColor: "#ffffff",
+            color: "#000",
+            fontWeight: 500,
+          },
+          "& .MuiSnackbarContent-action": {
+            width: "100%",
+          },
+        }}
+        open={allowCookiePopup}
+        message="This website uses cookies to enhance user experience and to analyze performance and traffic on our website. We also share information about your use of our site with our social media, advertising and analytics partners. More Info"
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        action={cookiesAction}
       />
       <Container>
         <InnerContainer>
