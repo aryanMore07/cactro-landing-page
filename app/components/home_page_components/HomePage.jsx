@@ -1,10 +1,12 @@
 "use client";
 import { home_page_context } from "@/utils/textUtils";
-import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid2, Snackbar, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import google_icon from "@/app/assets/google_icon.png";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const Container = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -93,79 +95,115 @@ const ClientLogoContainer = styled(Box)(({ theme }) => ({
 }));
 
 function HomePage() {
-  return (
-    <Container>
-      <InnerContainer>
-        <Grid2 container>
-          <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
-            <LeftSideContainer>
-              <Title>{home_page_context.left_side_context.title}</Title>
-              <Description>
-                {home_page_context.left_side_context.description}
-              </Description>
-              <Stack direction="row" spacing={1}>
-                <Button color="secondary" variant="contained" size="large">
-                  Try For Free
-                </Button>
-                <Googlebtn>
-                  <GlogoContainer>
-                    <Glogo src={google_icon} alt="Google INC." />
-                  </GlogoContainer>
-                  Sign Up With Goggle
-                </Googlebtn>
-              </Stack>
-            </LeftSideContainer>
-          </Grid2>
-          <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
-            <DemoImage
-              src={home_page_context.right_side_image}
-              alt="Image Representing Slack UI"
-            />
-          </Grid2>
-        </Grid2>
+  const [open, setOpen] = useState(true);
 
-        <ClientLogoContainer>
-          <Grid2 container columns={{ xs: 14, sm: 14, md: 14 }}>
-            {home_page_context.our_clients.map((data) => {
-              return (
-                <Grid2 key={data._id} size={{ md: 2 }}>
-                  <Stack
-                    height="100%"
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <ClientLogo src={data.src} alt={data.alt_text} />
-                  </Stack>
-                </Grid2>
-              );
-            })}
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
+  return (
+    <>
+      <Snackbar
+        sx={{
+          "& .MuiSnackbarContent-root": {
+            borderRadius: "50px !important",
+            backgroundColor: "#0064A0",
+          },
+          "& .MuiSnackbarContent-message": {
+            width: "90%",
+          },
+        }}
+        open={open}
+        message="Slack is your Digital HQ. Meet the new features keeping teams connected in a work-from-anywhere world. Let'Go"
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        action={action}
+      />
+      <Container>
+        <InnerContainer>
+          <Grid2 container>
+            <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
+              <LeftSideContainer>
+                <Title>{home_page_context.left_side_context.title}</Title>
+                <Description>
+                  {home_page_context.left_side_context.description}
+                </Description>
+                <Stack direction="row" spacing={1}>
+                  <Button color="secondary" variant="contained" size="large">
+                    Try For Free
+                  </Button>
+                  <Googlebtn>
+                    <GlogoContainer>
+                      <Glogo src={google_icon} alt="Google INC." />
+                    </GlogoContainer>
+                    Sign Up With Goggle
+                  </Googlebtn>
+                </Stack>
+              </LeftSideContainer>
+            </Grid2>
+            <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
+              <DemoImage
+                src={home_page_context.right_side_image}
+                alt="Image Representing Slack UI"
+              />
+            </Grid2>
           </Grid2>
-        </ClientLogoContainer>
-        <Grid2 container>
-          <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
-            <DemoImage
-              src={home_page_context.second_section_context.image}
-              alt="Image Representing Slack UI"
-            />
+
+          <ClientLogoContainer>
+            <Grid2 container columns={{ xs: 14, sm: 14, md: 14 }}>
+              {home_page_context.our_clients.map((data) => {
+                return (
+                  <Grid2 key={data._id} size={{ md: 2 }}>
+                    <Stack
+                      height="100%"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <ClientLogo src={data.src} alt={data.alt_text} />
+                    </Stack>
+                  </Grid2>
+                );
+              })}
+            </Grid2>
+          </ClientLogoContainer>
+          <Grid2 container>
+            <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
+              <DemoImage
+                src={home_page_context.second_section_context.image}
+                alt="Image Representing Slack UI"
+              />
+            </Grid2>
+            <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
+              <LeftSideContainer>
+                <SecondSectionTitle>
+                  {home_page_context.second_section_context.title}
+                </SecondSectionTitle>
+                <SecondSectionDescription>
+                  {home_page_context.second_section_context.description}
+                </SecondSectionDescription>
+                <Stack direction="row" spacing={1}>
+                  <Button color="secondary" variant="outlined" size="large">
+                    Watch Video
+                  </Button>
+                </Stack>
+              </LeftSideContainer>
+            </Grid2>
           </Grid2>
-          <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
-            <LeftSideContainer>
-              <SecondSectionTitle>
-                {home_page_context.second_section_context.title}
-              </SecondSectionTitle>
-              <SecondSectionDescription>
-                {home_page_context.second_section_context.description}
-              </SecondSectionDescription>
-              <Stack direction="row" spacing={1}>
-                <Button color="secondary" variant="outlined" size="large">
-                  Watch Video
-                </Button>
-              </Stack>
-            </LeftSideContainer>
-          </Grid2>
-        </Grid2>
-      </InnerContainer>
-    </Container>
+        </InnerContainer>
+      </Container>
+    </>
   );
 }
 
