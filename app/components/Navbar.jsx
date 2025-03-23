@@ -34,7 +34,7 @@ const RightContainer = styled(Box)(({ theme }) => ({
   height: "100%",
   display: "flex",
   alignItems: "center",
-  gap: theme.spacing(2)
+  gap: theme.spacing(2),
 }));
 
 const Logo = styled(Image)(({ theme }) => ({
